@@ -1,0 +1,10 @@
+#!/bin/sh
+# Stamp the About section of index.html with the commit time.
+# Enable once per clone:  git config core.hooksPath .githooks
+f=index.html
+[ -f "$f" ] || exit 0
+iso=$(date "+%Y-%m-%dT%H:%M:%S%z" | sed 's/\([0-9][0-9]\)$/:\1/')
+human=$(date "+%Y-%m-%d %H:%M %Z")
+STAMP_ISO="$iso" STAMP_HUMAN="$human" perl -0pi -e \
+  's{<time datetime="[^"]*">[^<]*</time>}{<time datetime="$ENV{STAMP_ISO}">$ENV{STAMP_HUMAN}</time>}' "$f"
+git add "$f"

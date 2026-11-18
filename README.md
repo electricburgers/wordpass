@@ -47,6 +47,14 @@ python3 -m http.server 8000
 node test.js
 ```
 
+## Release timestamp
+
+A pre-commit hook stamps the About section of `index.html` with the commit time. Enable it once per clone:
+
+```sh
+git config core.hooksPath .githooks
+```
+
 ## Deploy
 
 Hosted with GitHub Pages from the `main` branch, root folder.
