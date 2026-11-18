@@ -27,4 +27,26 @@ const c = new Array(10).fill(0);
 for (let i = 0; i < 200000; i++) c[G.randInt(10, require("crypto").webcrypto)]++;
 assert(c.every((n) => Math.abs(n - 20000) < 800), "digits roughly uniform " + c);
 
+// separators
+const W = require("crypto").webcrypto;
+for (const [name, ch] of [["hyphen", "-"], ["space", " "], ["comma", ","], ["period", "."]]) {
+  const r = G.generate(["aa"], { count: 3, separator: name }, W);
+  assert.strictEqual(r, ["aa", "aa", "aa"].join(ch), name);
+}
+
+// caps count
+const base = ["one", "two", "three", "four", "five", "six"];
+for (let k = 0; k <= 6; k++) {
+  const r = G.generate(base, { count: 6, separator: "space", capsCount: k }, W);
+  const n = r.split(" ").filter((w) => w === w.toUpperCase()).length;
+  assert.strictEqual(n, k, r);
+}
+assert.strictEqual(G.generate(base, { count: 3, separator: "space", capsCount: 99 }, W).split(" ").every((w) => w === w.toUpperCase()), true);
+// caps positions roughly uniform
+const pos = new Array(5).fill(0);
+for (let i = 0; i < 50000; i++) G.generate(["a","b","c","d","e"], { count: 5, separator: "space", capsCount: 1 }, W).split(" ").forEach((w, j) => { if (w === w.toUpperCase()) pos[j]++; });
+assert(pos.every((n) => Math.abs(n - 10000) < 500), "caps positions " + pos);
+// caps entropy: C(5,2)=10
+assert(Math.abs(G.entropyBits(7776, { count: 5, separator: "space", capsCount: 2 }) - (5 * Math.log2(7776) + Math.log2(10))) < 1e-9);
+
 console.log("all tests passed");

@@ -13,9 +13,9 @@
     <p class="sub">Random-word passphrase generator</p>
 
     <div class="output-wrap">
-      <output id="password" class="password" aria-live="polite"></output>
+      <output id="password" class="password" aria-live="polite" role="button" tabindex="0" title="Tap to copy"></output>
       <div class="actions">
-        <button id="copy" type="button">Copy</button>
+        <button id="copy" type="button" class="primary">Copy</button>
         <button id="regen" type="button" class="secondary" aria-label="Generate new password">↻ New</button>
       </div>
     </div>
@@ -38,10 +38,20 @@
         <legend>Separator</legend>
         <div class="seg" role="radiogroup">
           <label><input type="radio" name="sep" value="period" checked><span>Periods</span></label>
+          <label><input type="radio" name="sep" value="hyphen"><span>Hyphens</span></label>
+          <label><input type="radio" name="sep" value="space"><span>Spaces</span></label>
+          <label><input type="radio" name="sep" value="comma"><span>Commas</span></label>
           <label><input type="radio" name="sep" value="numbers"><span>Numbers</span></label>
         </div>
       </fieldset>
 
+      <div class="row">
+        <label for="caps">Random ALL CAPS words</label>
+        <div class="count-ctl">
+          <input id="caps" type="range" min="0" max="15" value="0">
+          <output id="caps-out" for="caps">0</output>
+        </div>
+      </div>
       <div class="row">
         <label for="cap">Capitalize words</label>
         <input id="cap" type="checkbox" class="switch">

@@ -12,17 +12,37 @@
     return x % max;
   }
 
+  const SEPARATORS = { period: ".", hyphen: "-", space: " ", comma: "," };
+
+  // k distinct indices from [0, n), uniformly (partial Fisher-Yates).
+  function pickDistinct(n, k, rng) {
+    const idx = Array.from({ length: n }, (_, i) => i);
+    for (let i = 0; i < k; i++) {
+      const j = i + randInt(n - i, rng);
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    return new Set(idx.slice(0, k));
+  }
+
+  function log2Choose(n, k) {
+    let r = 0;
+    for (let i = 1; i <= k; i++) r += Math.log2((n - k + i) / i);
+    return r;
+  }
+
   function generate(words, opts, rng) {
     const n = opts.count;
+    const caps = pickDistinct(n, Math.min(opts.capsCount || 0, n), rng);
     const parts = [];
     for (let i = 0; i < n; i++) {
       let w = words[randInt(words.length, rng)];
-      if (opts.capitalize) w = w[0].toUpperCase() + w.slice(1);
+      if (caps.has(i)) w = w.toUpperCase();
+      else if (opts.capitalize) w = w[0].toUpperCase() + w.slice(1);
       parts.push(w);
     }
     let out = parts[0];
     for (let i = 1; i < n; i++) {
-      const sep = opts.separator === "numbers" ? String(randInt(10, rng)) : ".";
+      const sep = opts.separator === "numbers" ? String(randInt(10, rng)) : SEPARATORS[opts.separator] || ".";
       out += sep + parts[i];
     }
     if (opts.trailingDigit) out += String(randInt(10, rng));
@@ -33,6 +53,8 @@
     let bits = opts.count * Math.log2(listSize);
     if (opts.separator === "numbers") bits += (opts.count - 1) * Math.log2(10);
     if (opts.trailingDigit) bits += Math.log2(10);
+    // Which words are ALL CAPS is random, so it adds log2(C(n, k)) bits.
+    bits += log2Choose(opts.count, Math.min(opts.capsCount || 0, opts.count));
     return bits;
   }
 

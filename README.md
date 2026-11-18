@@ -9,9 +9,11 @@ See [plan.md](plan.md) for the design and [CHANGELOG.md](CHANGELOG.md) for relea
 ## Features
 
 - Random full English words (EFF Large Wordlist, 7,776 words)
-- Separator choice: periods or random numbers
+- Separator choice: periods, hyphens, spaces, commas, or random numbers
 - Adjustable number of words
+- Choose how many words are randomly ALL CAPS
 - Optional capitalization and trailing digit
+- One-tap copy: tap the password or the Copy button, then paste into Apple Passwords or any app
 - Strength meter based on entropy in bits
 - One-click copy
 - 100% client-side: nothing is sent, stored, or logged
@@ -21,7 +23,10 @@ See [plan.md](plan.md) for the design and [CHANGELOG.md](CHANGELOG.md) for relea
 Words are picked with `crypto.getRandomValues` using rejection sampling, so every word is equally likely and there is no modulo bias. Strength is calculated as:
 
 ```
-bits = words * log2(7776) + (numeric separators ? (words - 1) * log2(10) : 0)
+bits = words * log2(7776)
+     + (numeric separators ? (words - 1) * log2(10) : 0)
+     + (trailing digit ? log2(10) : 0)
+     + log2(C(words, capsCount))
 ```
 
 For example, 4 words is about 51.7 bits, and 6 words is about 77.5 bits. Strength assumes an attacker knows the method and the word list.

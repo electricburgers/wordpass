@@ -24,9 +24,10 @@ h1 { margin: 0; font-size: 1.5rem; }
 .output-wrap { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
 .password {
   display: block; font: 600 1.35rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
-  word-break: break-all; min-height: 2.8em; margin-bottom: .75rem;
+  word-break: break-all; white-space: pre-wrap; min-height: 2.8em; margin-bottom: .75rem; cursor: pointer; user-select: all; -webkit-user-select: all;
 }
 .actions { display: flex; gap: .5rem; }
+.actions .primary { flex: 1; padding: .85rem 1rem; font-size: 1.1rem; }
 button {
   font: inherit; font-weight: 600; padding: .5rem 1rem; border-radius: 8px; cursor: pointer;
   border: 1px solid var(--accent); background: var(--accent); color: var(--accent-text);
@@ -45,7 +46,7 @@ fieldset.row { display: flex; }
 .count-ctl { display: flex; align-items: center; gap: .75rem; }
 .count-ctl output { min-width: 1.5rem; text-align: right; font-weight: 600; }
 input[type=range] { width: 160px; accent-color: var(--accent); }
-.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
 .seg label { cursor: pointer; }
 .seg input { position: absolute; opacity: 0; }
 .seg span { display: block; padding: .35rem .9rem; }

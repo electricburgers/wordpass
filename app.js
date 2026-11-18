@@ -1,12 +1,14 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const KEY = "wordpass:options";
-  const defaults = { count: 4, separator: "period", capitalize: false, trailingDigit: false };
+  const defaults = { count: 4, separator: "period", capitalize: false, trailingDigit: false, capsCount: 0 };
   const colors = { Weak: "--weak", Fair: "--fair", Good: "--good", Strong: "--strong", Excellent: "--excellent" };
 
   let opts = Object.assign({}, defaults);
   try { Object.assign(opts, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
   opts.count = Math.min(15, Math.max(3, Number(opts.count) || 4));
+  opts.capsCount = Math.min(opts.count, Math.max(0, Number(opts.capsCount) || 0));
+  if (!["period","hyphen","space","comma","numbers"].includes(opts.separator)) opts.separator = "period";
 
   function render() {
     $("password").textContent = Gen.generate(WORDS, opts);
@@ -22,6 +24,10 @@
   function syncControls() {
     $("count").value = opts.count;
     $("count-out").textContent = opts.count;
+    opts.capsCount = Math.min(opts.capsCount, opts.count);
+    $("caps").max = opts.count;
+    $("caps").value = opts.capsCount;
+    $("caps-out").textContent = opts.capsCount;
     $("cap").checked = opts.capitalize;
     $("digit").checked = opts.trailingDigit;
     document.querySelector('input[name=sep][value=' + opts.separator + ']').checked = true;
@@ -35,13 +41,14 @@
   }
 
   $("count").addEventListener("input", (e) => change({ count: Number(e.target.value) }));
+  $("caps").addEventListener("input", (e) => change({ capsCount: Number(e.target.value) }));
   $("cap").addEventListener("change", (e) => change({ capitalize: e.target.checked }));
   $("digit").addEventListener("change", (e) => change({ trailingDigit: e.target.checked }));
   document.querySelectorAll("input[name=sep]").forEach((r) =>
     r.addEventListener("change", (e) => change({ separator: e.target.value })));
   $("regen").addEventListener("click", render);
 
-  $("copy").addEventListener("click", async () => {
+  async function copy() {
     const text = $("password").textContent;
     try {
       await navigator.clipboard.writeText(text);
@@ -52,7 +59,13 @@
       document.execCommand("copy");
     }
     $("copy").textContent = "Copied ✓";
-    setTimeout(() => ($("copy").textContent = "Copy"), 1500);
+    clearTimeout(copy.t);
+    copy.t = setTimeout(() => ($("copy").textContent = "Copy"), 1500);
+  }
+  $("copy").addEventListener("click", copy);
+  $("password").addEventListener("click", copy);
+  $("password").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); copy(); }
   });
 
   syncControls();

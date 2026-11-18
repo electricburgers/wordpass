@@ -5,6 +5,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-17
+
+### Added
+- Hyphen, space, and comma separators (alongside periods and numbers).
+- "Random ALL CAPS words" slider: choose how many words, picked at random positions, are fully uppercase. Counted in the entropy (adds log2 C(n, k) bits).
+- One-tap copy: tap the password itself, or the large Copy button, for pasting into Apple Passwords or any other app.
+
 ## [1.0.0] - 2026-11-17
 
 ### Added
