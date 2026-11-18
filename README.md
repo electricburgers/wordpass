@@ -13,8 +13,8 @@ See [plan.md](plan.md) for the design and [CHANGELOG.md](CHANGELOG.md) for relea
 - Adjustable number of words
 - Choose how many words are randomly ALL CAPS
 - Optional capitalization and trailing digit
-- Apple-style preset, word-length filter (up to 5-8 letters), and sans/serif/mono password fonts (bundled, OFL)
-- Installable offline PWA, optional auto-copy on New, and a button that copies and opens the Passwords app
+- word-length filter (up to 5-8 letters), bundled Inter font (OFL)
+- Installable offline PWA, optional auto-copy on New
 - One-tap copy: tap the password or the Copy button, then paste into Apple Passwords or any app
 - Strength meter based on entropy in bits
 - One-click copy
@@ -61,7 +61,7 @@ Hosted with GitHub Pages from the `main` branch, root folder.
 
 ## Credits
 
-Fonts (bundled, SIL OFL 1.1): [Inter](https://rsms.me/inter/), [Source Serif 4](https://github.com/adobe-fonts/source-serif), [JetBrains Mono](https://www.jetbrains.com/lp/mono/). License texts are in `fonts/`.
+Font (bundled, SIL OFL 1.1): [Inter](https://rsms.me/inter/). License texts are in `fonts/`.
 
 Word list: [EFF Large Wordlist](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) by the Electronic Frontier Foundation, licensed [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
 

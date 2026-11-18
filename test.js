@@ -19,8 +19,8 @@ assert.strictEqual(G.strengthLabel(120), "Excellent");
 // format
 const p = G.generate(WORDS, { count: 5, separator: "period" }, require("crypto").webcrypto);
 assert.strictEqual(p.split(".").length, 5);
-const q = G.generate(WORDS, { count: 4, separator: "numbers", capitalize: true, trailingDigit: true }, require("crypto").webcrypto);
-assert(/^[A-Z][a-z-]*(\d[A-Z][a-z-]*){3}\d$/.test(q), q);
+const q = G.generate(WORDS, { count: 4, separator: "numbers", trailingDigit: true }, require("crypto").webcrypto);
+assert(/^[a-z-]+(\d[a-z-]+){3}\d$/.test(q), q);
 
 // uniformity sanity: 10 buckets, 200k draws
 const c = new Array(10).fill(0);
@@ -29,7 +29,7 @@ assert(c.every((n) => Math.abs(n - 20000) < 800), "digits roughly uniform " + c)
 
 // separators
 const W = require("crypto").webcrypto;
-for (const [name, ch] of [["hyphen", "-"], ["space", " "], ["comma", ","], ["period", "."]]) {
+for (const [name, ch] of [["hyphen", "-"], ["space", " "], ["comma", ","], ["semicolon", ";"], ["period", "."]]) {
   const r = G.generate(["aa"], { count: 3, separator: name }, W);
   assert.strictEqual(r, ["aa", "aa", "aa"].join(ch), name);
 }

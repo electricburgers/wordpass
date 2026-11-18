@@ -12,7 +12,7 @@
     return x % max;
   }
 
-  const SEPARATORS = { period: ".", hyphen: "-", space: " ", comma: "," };
+  const SEPARATORS = { period: ".", hyphen: "-", space: " ", comma: ",", semicolon: ";" };
 
   // k distinct indices from [0, n), uniformly (partial Fisher-Yates).
   function pickDistinct(n, k, rng) {
@@ -45,7 +45,6 @@
     for (let i = 0; i < n; i++) {
       let w = words[randInt(words.length, rng)];
       if (caps.has(i)) w = w.toUpperCase();
-      else if (opts.capitalize) w = w[0].toUpperCase() + w.slice(1);
       parts.push(w);
     }
     let out = parts[0];

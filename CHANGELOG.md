@@ -5,8 +5,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-17
 ### Added
+- Semicolon separator.
 - Pre-commit hook (`.githooks/pre-commit`) that updates the About timestamp on every commit.
+
+### Changed
+- Removed the password font option (and the unused Source Serif 4 and JetBrains Mono fonts).
+- Removed the "Capitalize words" option.
+- Separator picker is now a dropdown instead of a segmented control.
+
+## [1.2.1] - 2026-11-17
+
+### Added
+- Password character count shown next to the entropy readout.
+
+### Fixed
+- Double-tapping quickly no longer zooms the page (pinch zoom still works).
 
 ## [1.2.0] - 2026-11-17
 

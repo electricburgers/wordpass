@@ -25,7 +25,6 @@
         <button id="copy" type="button" class="primary">Copy</button>
         <button id="regen" type="button" class="secondary" aria-label="Generate new password">↻ New</button>
       </div>
-      <a id="open-passwords" class="open-link" href="passwords://">Copy &amp; open Passwords app ↗</a>
     </div>
 
     <div class="strength" aria-live="polite">
@@ -33,10 +32,6 @@
       <div class="strength-text"><strong id="strength-label"></strong> <span id="strength-bits"></span></div>
     </div>
 
-    <div class="presets">
-      <button id="preset-apple" type="button" class="secondary small">Apple-style preset</button>
-      <span class="hint">4 words, hyphens, capitalized, ends in a number</span>
-    </div>
 
     <div class="controls">
       <div class="row">
@@ -47,16 +42,17 @@
         </div>
       </div>
 
-      <fieldset class="row">
-        <legend>Separator</legend>
-        <div class="seg" role="radiogroup">
-          <label><input type="radio" name="sep" value="period" checked><span>Periods</span></label>
-          <label><input type="radio" name="sep" value="hyphen"><span>Hyphens</span></label>
-          <label><input type="radio" name="sep" value="space"><span>Spaces</span></label>
-          <label><input type="radio" name="sep" value="comma"><span>Commas</span></label>
-          <label><input type="radio" name="sep" value="numbers"><span>Numbers</span></label>
-        </div>
-      </fieldset>
+      <div class="row">
+        <label for="sep">Separator</label>
+        <select id="sep">
+          <option value="period">Period ( . )</option>
+          <option value="hyphen">Hyphen ( - )</option>
+          <option value="space">Space</option>
+          <option value="comma">Comma ( , )</option>
+          <option value="semicolon">Semicolon ( ; )</option>
+          <option value="numbers">Random numbers</option>
+        </select>
+      </div>
 
       <div class="row">
         <label for="maxlen">Word length</label>
@@ -77,22 +73,10 @@
         </div>
       </div>
       <div class="row">
-        <label for="cap">Capitalize words</label>
-        <input id="cap" type="checkbox" class="switch">
-      </div>
-      <div class="row">
         <label for="digit">Add a number at the end</label>
         <input id="digit" type="checkbox" class="switch">
       </div>
 
-      <fieldset class="row">
-        <legend>Password font</legend>
-        <div class="seg" role="radiogroup">
-          <label><input type="radio" name="font" value="sans" checked><span>Sans</span></label>
-          <label><input type="radio" name="font" value="serif"><span>Serif</span></label>
-          <label><input type="radio" name="font" value="mono"><span>Mono</span></label>
-        </div>
-      </fieldset>
       <div class="row">
         <label for="autocopy">Copy automatically on New</label>
         <input id="autocopy" type="checkbox" class="switch">
@@ -101,11 +85,11 @@
 
     <details id="about" class="about">
       <summary>About</summary>
-      <p><strong>wordpass</strong> v1.2.0 · <time datetime="2026-11-17T19:38:25-05:00">2026-11-17 19:38 EST</time></p>
+      <p><strong>wordpass</strong> v1.3.0 · <time datetime="2026-11-17T19:44:59-05:00">2026-11-17 19:44 EST</time></p>
       <p>Nothing leaves your browser. Passwords are made with <code>crypto.getRandomValues</code>, are never stored, and the app works offline once loaded. On iPhone or iPad, use Share → Add to Home Screen to install it.</p>
       <ul>
         <li>Words: <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF Large Wordlist</a> (CC BY 3.0 US)</li>
-        <li>Fonts (SIL OFL 1.1, bundled): <a href="https://rsms.me/inter/">Inter</a>, <a href="https://github.com/adobe-fonts/source-serif">Source Serif 4</a>, <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></li>
+        <li>Font (SIL OFL 1.1, bundled): <a href="https://rsms.me/inter/">Inter</a></li>
         <li><a href="https://github.com/electricburgers/wordpass">Source code</a> (MIT)</li>
       </ul>
     </details>
