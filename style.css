@@ -26,7 +26,7 @@ h1 { margin: 0; font-size: 1.5rem; }
 .sub { margin: 0 0 1.25rem; color: var(--muted); }
 .output-wrap { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
 .password {
-  display: block; font: 600 1.35rem/1.4 "Inter", system-ui, sans-serif;
+  display: block; font: 600 1.25rem/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   word-break: break-all; white-space: pre-wrap; min-height: 2.8em; margin-bottom: .75rem; cursor: pointer; user-select: all; -webkit-user-select: all;
 }
 .actions { display: flex; gap: .5rem; }

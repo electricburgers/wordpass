@@ -1,5 +1,5 @@
 // Offline cache. Bump CACHE on each release.
-const CACHE = "wordpass-v1.3.0";
+const CACHE = "wordpass-v1.4.0";
 const ASSETS = [
   "./", "index.html", "style.css", "app.js", "gen.js", "words.js", "manifest.webmanifest",
   "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",

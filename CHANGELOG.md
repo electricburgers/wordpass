@@ -5,6 +5,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-17
+### Changed
+- Password is now always displayed in a monospace font.
+
 ## [1.3.0] - 2026-11-17
 ### Added
 - Semicolon separator.
