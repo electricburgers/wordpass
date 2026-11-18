@@ -5,6 +5,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-17
+### Changed
+- When a new version is found, the app clears old caches, re-downloads all assets bypassing the HTTP cache, and reloads automatically.
+- Update check also runs whenever the app returns to the foreground.
+
 ## [1.4.0] - 2026-11-17
 ### Changed
 - Password is now always displayed in a monospace font.
