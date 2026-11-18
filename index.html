@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>wordpass – random passphrase generator</title>
   <meta name="description" content="Generate strong, memorable passphrases from random English words. Runs entirely in your browser.">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="wordpass">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,11 +25,17 @@
         <button id="copy" type="button" class="primary">Copy</button>
         <button id="regen" type="button" class="secondary" aria-label="Generate new password">↻ New</button>
       </div>
+      <a id="open-passwords" class="open-link" href="passwords://">Copy &amp; open Passwords app ↗</a>
     </div>
 
     <div class="strength" aria-live="polite">
       <div class="bar" role="presentation"><div id="bar-fill"></div></div>
       <div class="strength-text"><strong id="strength-label"></strong> <span id="strength-bits"></span></div>
+    </div>
+
+    <div class="presets">
+      <button id="preset-apple" type="button" class="secondary small">Apple-style preset</button>
+      <span class="hint">4 words, hyphens, capitalized, ends in a number</span>
     </div>
 
     <div class="controls">
@@ -46,6 +59,17 @@
       </fieldset>
 
       <div class="row">
+        <label for="maxlen">Word length</label>
+        <select id="maxlen">
+          <option value="0">Any length</option>
+          <option value="8">Up to 8 letters</option>
+          <option value="7">Up to 7 letters</option>
+          <option value="6">Up to 6 letters</option>
+          <option value="5">Up to 5 letters</option>
+        </select>
+      </div>
+
+      <div class="row">
         <label for="caps">Random ALL CAPS words</label>
         <div class="count-ctl">
           <input id="caps" type="range" min="0" max="15" value="0">
@@ -60,13 +84,31 @@
         <label for="digit">Add a number at the end</label>
         <input id="digit" type="checkbox" class="switch">
       </div>
+
+      <fieldset class="row">
+        <legend>Password font</legend>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="font" value="sans" checked><span>Sans</span></label>
+          <label><input type="radio" name="font" value="serif"><span>Serif</span></label>
+          <label><input type="radio" name="font" value="mono"><span>Mono</span></label>
+        </div>
+      </fieldset>
+      <div class="row">
+        <label for="autocopy">Copy automatically on New</label>
+        <input id="autocopy" type="checkbox" class="switch">
+      </div>
     </div>
 
-    <footer>
-      Nothing leaves your browser. Words from the
-      <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF Large Wordlist</a> (CC BY 3.0 US).
-      <a href="https://github.com/electricburgers/wordpass">Source</a>
-    </footer>
+    <details id="about" class="about">
+      <summary>About</summary>
+      <p><strong>wordpass</strong> v1.2.0 · <time datetime="2026-11-17T19:35:28-05:00">2026-11-17 19:35 EST</time></p>
+      <p>Nothing leaves your browser. Passwords are made with <code>crypto.getRandomValues</code>, are never stored, and the app works offline once loaded. On iPhone or iPad, use Share → Add to Home Screen to install it.</p>
+      <ul>
+        <li>Words: <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF Large Wordlist</a> (CC BY 3.0 US)</li>
+        <li>Fonts (SIL OFL 1.1, bundled): <a href="https://rsms.me/inter/">Inter</a>, <a href="https://github.com/adobe-fonts/source-serif">Source Serif 4</a>, <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a></li>
+        <li><a href="https://github.com/electricburgers/wordpass">Source code</a> (MIT)</li>
+      </ul>
+    </details>
   </main>
   <script src="words.js"></script>
   <script src="gen.js"></script>

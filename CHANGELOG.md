@@ -5,6 +5,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-17
+
+### Added
+- Installable offline web app: web manifest, icons, and a service worker (Add to Home Screen on iPhone/iPad).
+- "Copy automatically on New" option.
+- Bundled open-source fonts (SIL OFL 1.1): Inter (sans), Source Serif 4 (serif), JetBrains Mono (mono), with a password font picker. No external font requests.
+- "Apple-style" preset: 4 words, hyphens, capitalized, ending in a number.
+- Word length filter (any, or up to 8/7/6/5 letters); strength uses the filtered list size.
+- "Copy & open Passwords app" button (`passwords://`, iOS 18+ / macOS 15+).
+- About section showing version and release timestamp, plus credits.
+
+### Changed
+- Hyphenated words (e.g. "drop-down") are excluded when the hyphen separator is selected.
+
 ## [1.1.0] - 2026-11-17
 
 ### Added

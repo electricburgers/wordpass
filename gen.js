@@ -30,6 +30,14 @@
     return r;
   }
 
+  // Apply the word-length cap. With the hyphen separator, drop hyphenated
+  // words (e.g. "drop-down") so word boundaries stay unambiguous.
+  function filterWords(words, opts) {
+    const max = opts.maxLen || 0;
+    const noHyphen = opts.separator === "hyphen";
+    return words.filter((w) => (!max || w.length <= max) && !(noHyphen && w.includes("-")));
+  }
+
   function generate(words, opts, rng) {
     const n = opts.count;
     const caps = pickDistinct(n, Math.min(opts.capsCount || 0, n), rng);
@@ -66,7 +74,7 @@
     return "Excellent";
   }
 
-  const api = { randInt, generate, entropyBits, strengthLabel };
+  const api = { filterWords, randInt, generate, entropyBits, strengthLabel };
   if (typeof module !== "undefined") module.exports = api;
   else root.Gen = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);

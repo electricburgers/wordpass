@@ -49,4 +49,11 @@ assert(pos.every((n) => Math.abs(n - 10000) < 500), "caps positions " + pos);
 // caps entropy: C(5,2)=10
 assert(Math.abs(G.entropyBits(7776, { count: 5, separator: "space", capsCount: 2 }) - (5 * Math.log2(7776) + Math.log2(10))) < 1e-9);
 
+// word filter
+const F6 = G.filterWords(WORDS, { maxLen: 6, separator: "period" });
+assert(F6.length > 2000 && F6.every((w) => w.length <= 6));
+assert(G.filterWords(WORDS, { separator: "hyphen" }).every((w) => !w.includes("-")));
+assert(G.filterWords(WORDS, { separator: "period" }).length === 7776);
+assert(G.filterWords(WORDS, { maxLen: 5, separator: "comma" }).length > 1400);
+
 console.log("all tests passed");

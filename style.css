@@ -1,3 +1,8 @@
+@font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url(fonts/inter-400.woff2) format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url(fonts/inter-600.woff2) format("woff2"); }
+@font-face { font-family: "Source Serif 4"; font-weight: 600; font-display: swap; src: url(fonts/source-serif-4-600.woff2) format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: swap; src: url(fonts/jetbrains-mono-600.woff2) format("woff2"); }
+
 :root {
   --bg: #f3f4f6; --card: #fff; --text: #111827; --muted: #6b7280; --border: #e5e7eb;
   --accent: #2563eb; --accent-text: #fff; --track: #e5e7eb;
@@ -13,7 +18,7 @@
 body {
   margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1rem;
   background: var(--bg); color: var(--text);
-  font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font: 16px/1.5 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 .card {
   width: 100%; max-width: 560px; background: var(--card); border: 1px solid var(--border);
@@ -23,7 +28,7 @@ h1 { margin: 0; font-size: 1.5rem; }
 .sub { margin: 0 0 1.25rem; color: var(--muted); }
 .output-wrap { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
 .password {
-  display: block; font: 600 1.35rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  display: block; font: 600 1.35rem/1.4 "Inter", system-ui, sans-serif;
   word-break: break-all; white-space: pre-wrap; min-height: 2.8em; margin-bottom: .75rem; cursor: pointer; user-select: all; -webkit-user-select: all;
 }
 .actions { display: flex; gap: .5rem; }
@@ -56,3 +61,20 @@ input[type=range] { width: 160px; accent-color: var(--accent); }
 footer { margin-top: 1.25rem; font-size: .8rem; color: var(--muted); }
 footer a { color: var(--accent); }
 @media (max-width: 480px) { .row { flex-wrap: wrap; } input[type=range] { width: 130px; } }
+
+.password[data-font="sans"] { font-family: "Inter", system-ui, sans-serif; }
+.password[data-font="serif"] { font-family: "Source Serif 4", Georgia, serif; font-size: 1.5rem; }
+.password[data-font="mono"] { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 1.2rem; }
+.open-link { display: block; margin-top: .75rem; text-align: center; color: var(--accent); font-weight: 600; text-decoration: none; padding: .5rem; border-radius: 8px; }
+.open-link:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.presets { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.hint { font-size: .8rem; color: var(--muted); }
+button.small { padding: .35rem .8rem; font-size: .9rem; }
+select { font: inherit; padding: .35rem .5rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); }
+select:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 50%, transparent); outline-offset: 2px; }
+.about { margin-top: 1.25rem; font-size: .85rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: .75rem; }
+.about summary { cursor: pointer; font-weight: 600; color: var(--text); }
+.about a { color: var(--accent); }
+.about ul { padding-left: 1.1rem; }
+.about code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .85em; }
+@supports (padding: max(0px)) { body { padding-bottom: max(1rem, env(safe-area-inset-bottom)); } }
