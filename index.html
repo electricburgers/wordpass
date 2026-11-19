@@ -16,9 +16,13 @@
 </head>
 <body>
   <main class="card">
-    <h1>wordpass</h1>
-    <p class="sub">Random-word passphrase generator</p>
+    <header>
+      <h1>wordpass</h1>
+      <p class="sub">Random-word passphrase generator</p>
+    </header>
 
+    <div class="layout">
+    <section class="result" aria-label="Generated passphrase">
     <div class="output-wrap">
       <output id="password" class="password" aria-live="polite" role="button" tabindex="0" title="Tap to copy"></output>
       <div class="actions">
@@ -31,7 +35,27 @@
       <div class="bar" role="presentation"><div id="bar-fill"></div></div>
       <div class="strength-text"><strong id="strength-label"></strong> <span id="strength-bits"></span></div>
     </div>
+    <p class="hint kbd-hint">Shortcuts: <kbd>N</kbd> new · <kbd>C</kbd> copy</p>
+    <a id="open-passwords" class="open-link" href="shortcuts://run-shortcut?name=Open%20Passwords" hidden>Open Passwords app ↗</a>
+    </section>
 
+    <section class="settings" aria-label="Options">
+    <div class="presets">
+      <label for="preset" class="visually-hidden">Preset</label>
+      <select id="preset"><option value="">Current settings</option></select>
+      <button id="preset-save" type="button" class="secondary small">Save…</button>
+      <button id="preset-del" type="button" class="secondary small danger" hidden>Delete</button>
+    </div>
+    <p class="preset-io">
+      <button id="preset-export" type="button" class="link">Export presets</button> ·
+      <button id="preset-import" type="button" class="link">Import presets</button>
+      <input id="preset-file" type="file" accept="application/json,.json" hidden>
+    </p>
+    <form id="preset-form" class="preset-form" hidden>
+      <input id="preset-name" type="text" maxlength="30" placeholder="Preset name" autocomplete="off" aria-label="Preset name" required>
+      <button type="submit" class="small">Save</button>
+      <button type="button" id="preset-cancel" class="secondary small">Cancel</button>
+    </form>
 
     <div class="controls">
       <div class="row">
@@ -40,6 +64,17 @@
           <input id="count" type="range" min="3" max="15" value="4">
           <output id="count-out" for="count">4</output>
         </div>
+      </div>
+
+      <div class="row">
+        <label for="list">Word list</label>
+        <select id="list">
+          <option value="large">EFF Large (7,776)</option>
+          <option value="short1">EFF Short #1 (1,296)</option>
+          <option value="short2">EFF Short #2 (1,296)</option>
+          <option value="fil">Filipino words &amp; food</option>
+          <option value="large+fil">EFF Large + Filipino</option>
+        </select>
       </div>
 
       <div class="row">
@@ -78,23 +113,40 @@
       </div>
 
       <div class="row">
+        <label for="symbol">Add a symbol at the end</label>
+        <input id="symbol" type="checkbox" class="switch">
+      </div>
+      <div class="row">
+        <label for="easy">Easy to read (no 0 or 1)</label>
+        <input id="easy" type="checkbox" class="switch">
+      </div>
+
+      <div class="row">
         <label for="autocopy">Copy automatically on New</label>
         <input id="autocopy" type="checkbox" class="switch">
       </div>
     </div>
+    </section>
+    </div>
 
     <details id="about" class="about">
       <summary>About</summary>
-      <p><strong>wordpass</strong> v1.5.0 · <time datetime="2026-11-17T20:19:19-05:00">2026-11-17 20:19 EST</time></p>
+      <p><strong>wordpass</strong> v1.7.0 · <time datetime="2026-11-19T10:29:43-05:00">2026-11-19 10:29 EST</time></p>
       <p>Nothing leaves your browser. Passwords are made with <code>crypto.getRandomValues</code>, are never stored, and the app works offline once loaded. On iPhone or iPad, use Share → Add to Home Screen to install it.</p>
+      <p>Presets are saved only on this device. Apple has no public link for opening Passwords. To get an “Open Passwords app” link, create a Shortcut named <code>Open Passwords</code> with the Open App action, then tap Enable below.</p>
+      <p><button id="enable-open" type="button" class="secondary small">Enable Open Passwords link</button></p>
       <ul>
-        <li>Words: <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF Large Wordlist</a> (CC BY 3.0 US)</li>
+        <li>Words: <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF Large and Short Wordlists</a> (CC BY 3.0 US), plus a Filipino list of food and everyday words</li>
         <li>Font (SIL OFL 1.1, bundled): <a href="https://rsms.me/inter/">Inter</a></li>
         <li><a href="https://github.com/electricburgers/wordpass">Source code</a> (MIT)</li>
       </ul>
     </details>
   </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="words.js"></script>
+  <script src="words-short1.js"></script>
+  <script src="words-short2.js"></script>
+  <script src="words-fil.js"></script>
   <script src="gen.js"></script>
   <script src="app.js"></script>
 </body>

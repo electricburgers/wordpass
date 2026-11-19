@@ -5,6 +5,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and th
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-11-19
+### Added
+- Word list choice: EFF Large, EFF Short #1, EFF Short #2, a Filipino/Tagalog list of food names and everyday words (spelled phonetically), or EFF Large + Filipino. Entropy uses the actual pool size.
+- "Add a symbol at the end" option (one of `!@#$%&*?=+`).
+- "Easy to read" option: random digits skip 0 and 1.
+- "Copied" toast.
+- Export and import presets as JSON.
+- PWA home-screen shortcut "Copy new passphrase" (`?copy=1`).
+
+## [1.6.0] - 2026-11-19
+### Added
+- Saved presets: save the current options under a name, reapply or delete them (stored on-device only).
+- Tablet and desktop layouts: wider card, two-column result/options on screens 960px+, sticky result, larger type, 44px touch targets on touch devices.
+- Keyboard shortcuts on desktop: N = new, C = copy.
+- Optional "Open Passwords app" link that runs a user-made Shortcut named "Open Passwords" (Apple provides no public `passwords://` scheme).
+
+### Changed
+- Word-list filtering is memoized and caps-position selection is O(k) instead of O(n).
+
 ## [1.5.0] - 2026-11-17
 ### Changed
 - When a new version is found, the app clears old caches, re-downloads all assets bypassing the HTTP cache, and reloads automatically.

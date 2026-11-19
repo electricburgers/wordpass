@@ -56,4 +56,30 @@ assert(G.filterWords(WORDS, { separator: "hyphen" }).every((w) => !w.includes("-
 assert(G.filterWords(WORDS, { separator: "period" }).length === 7776);
 assert(G.filterWords(WORDS, { maxLen: 5, separator: "comma" }).length > 1400);
 
+// filter memoization returns the same array; unfiltered returns the source
+assert.strictEqual(G.filterWords(WORDS, { maxLen: 6, separator: "comma" }), G.filterWords(WORDS, { maxLen: 6, separator: "period" }));
+assert.strictEqual(G.filterWords(WORDS, { separator: "period" }), WORDS);
+
+// sparse pickDistinct: exact count and uniform positions via caps with n=15
+for (let k = 0; k <= 15; k++) {
+  const r = G.generate(Array(15).fill("a"), { count: 15, separator: "space", capsCount: k }, W);
+  assert.strictEqual(r.split(" ").filter((w) => w === "A").length, k);
+}
+
+// extra lists, symbol, easy-read
+for (const f of ["./words-short1.js", "./words-short2.js", "./words-fil.js"]) {
+  const L = require(f);
+  assert(L.every((w) => /^[a-z]+(-[a-z]+)*$/.test(w)) && new Set(L).size === L.length, f);
+}
+assert.strictEqual(require("./words-short1.js").length, 1296);
+assert.strictEqual(require("./words-short2.js").length, 1296);
+const combo = G.buildList("large+fil", { large: WORDS, fil: require("./words-fil.js") });
+assert.strictEqual(new Set(combo).size, combo.length);
+for (let i = 0; i < 300; i++) {
+  const r = G.generate(["aa"], { count: 3, separator: "numbers", trailingDigit: true, trailingSymbol: true, easyRead: true }, W);
+  assert(/^aa[2-9]aa[2-9]aa[2-9][!@#$%&*?=+]$/.test(r), r);
+}
+assert(Math.abs(G.entropyBits(1000, { count: 2, separator: "period", trailingSymbol: true }) - (2 * Math.log2(1000) + Math.log2(10))) < 1e-9);
+assert(Math.abs(G.entropyBits(1000, { count: 2, separator: "period", trailingDigit: true, easyRead: true }) - (2 * Math.log2(1000) + 3)) < 1e-9);
+
 console.log("all tests passed");
